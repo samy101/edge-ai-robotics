@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACM India Summer School 2026 | Edge AI & Robotics</title>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Remix Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
-    <!-- Using the styles from your base template -->
     <link rel="stylesheet" href="styles.css">
     
     <style>
@@ -24,15 +20,24 @@
             color: var(--text-dark);
             border-radius: var(--radius-md);
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
+        
         .schedule-table th, .schedule-table td {
             padding: 12px 15px;
             border: 1px solid var(--border-color);
         }
+        
         .schedule-table thead {
             background-color: var(--primary);
             color: white;
         }
+
+        /* Force dark text for inline colored rows to maintain readability in dark mode */
+        .schedule-table tbody tr {
+            color: #1a1a1a; 
+        }
+
         .speaker-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -65,7 +70,6 @@
         .feature-card.animate {
             transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         /* Base state for the card */
         .feature-card {
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, background 0.3s ease;
@@ -73,49 +77,42 @@
             z-index: 1;
             position: relative;
         }
-
         .feature-card:hover {
-            /* 1. Scale and Lift */
             transform: scale(1.08) translateY(-10px); 
-            
-            /* 2. Force Background to stay consistent */
             background: var(--card-bg) !important;
-            
-            /* 3. Deep shadow to create the 'bigger' look */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            
-            /* 4. Ensure it stays on top */
             z-index: 10;
         }
-
-        /* 5. FORCE TEXT VISIBILITY: Explicitly use theme variables */
         .feature-card:hover h3 {
             color: var(--text-dark) !important;
             opacity: 1 !important;
             visibility: visible !important;
         }
-
         .feature-card:hover p {
             color: var(--text-light) !important;
             opacity: 1 !important;
             visibility: visible !important;
         }
-
-        /* 6. ICON VISIBILITY */
         .feature-card:hover .feature-icon i {
             color: var(--primary) !important;
             opacity: 1 !important;
         }
-
-        /* Dark Mode shadow adjustment */
         [data-theme="dark"] .feature-card:hover {
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            /* In dark mode, text-dark is light, so this works perfectly */
+        }
+
+        /* Formatted text for program section */
+        #programs h3 {
+            color: var(--text-dark);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        #programs p {
+            color: var(--text-light);
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <a href="#top" class="nav-logo-link">
@@ -127,6 +124,7 @@
                 <a href="#about">About</a>
                 <a href="#topics">Topics</a>
                 <a href="#speakers">Speakers</a>
+                <a href="#programs">Program</a>
                 <a href="#venue">Venue</a>
                 <a href="#contacts">Contact</a>
                 <div class="theme-switch-wrapper">
@@ -144,9 +142,7 @@
             <button class="mobile-menu-btn"><i class="ri-menu-line"></i></button>
         </div>
     </nav>
-
     <div id="main-content">
-        <!-- 1. HERO SECTION -->
         <section class="hero" id="top">
             <canvas id="network-graph"></canvas>
             <div class="hero-content">
@@ -163,9 +159,8 @@
                 <a href="#about"><i class="ri-arrow-down-line"></i></a>
             </div>
         </section>
-
-        <!-- 2. ABOUT SECTION -->
-        <section id="about">
+        
+        <section id="about" class="sponsors">
             <div class="container">
                 <div class="section-title">
                     <h2>About the School</h2>
@@ -175,7 +170,6 @@
                     <span id="typewriter-text" class="typewriter-text"></span>
                     <span class="typewriter-cursor">|</span>
                 </div>
-
                 <div class="about-wrapper">
                     <div class="about-image">
                         <div class="interactive-image-container">
@@ -211,18 +205,11 @@
                                     <i class="ri-calendar-event-line"></i>
                                     <span>July 8 - 13, 2026</span>
                                 </div>
-                                <!-- <p>The ACM India Summer School 2026 provides a focused overview of intelligent edge systems that integrate AI with modern robotic platforms. Through lectures, hands-on labs, and expert talks, participants will master real-time perception, control, and co-optimization for resource-constrained devices.</p> -->
                                 <p>The ACM India Summer School 2026 on Edge AI and Robotics will provide a focused overview of intelligent edge systems that integrate AI with modern robotic platforms. The program will cover edge computing architectures, hardware accelerators, real-time perception and control, and co-optimization of machine learning models for performance, power, and accuracy on resource-constrained devices. Participants will also explore federated learning, generative AI/LLMs, and autonomous agents deployed on edge and robotic systems across applications such as smart mobility, drones, industrial automation, and smart agriculture. Through lectures, hands-on labs, and expert talks, the school will equip participants with practical skills to design and deploy intelligent edge-robotic systems for real-world applications.</p>
-                                <!-- <div class="benefit-list animated-list show">
-                                    <div class="benefit-item"><i class="ri-check-line"></i> Design end-to-end Edge AI pipelines</div>
-                                    <div class="benefit-item"><i class="ri-check-line"></i> Deploy Generative AI models on-device</div>
-                                    <div class="benefit-item"><i class="ri-check-line"></i> Optimize robotics for real-world constraints</div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="container">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
                         
@@ -241,7 +228,6 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="eligibility-box animate" style="cursor: pointer; transition: all 0.4s ease;" 
                             onmouseover="this.style.transform='translateY(-10px)';" 
                             onmouseout="this.style.transform='translateY(0)';">
@@ -265,209 +251,411 @@
                 </div>
             </div>
         </section>
-
-        <!-- 3. TOPICS SECTION -->
+        
         <section id="topics" class="prize-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Key Topics</h2>
-            </div>
-            
-            <div class="cards-grid">
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-wifi-line"></i></div>
-                    <h3>Foundations</h3>
-                    <p>IoT/CPS, Accelerated Edge Computing, and Edge AI architectures.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">Architecture</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-rfid-line"></i></div>
-                    <h3>TinyML</h3>
-                    <p>Embedded Machine Learning for resource-constrained microcontrollers.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">Micro-AI</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-rocket-2-line"></i></div>
-                    <h3>Optimization</h3>
-                    <p>Compression, Quantization, and Hardware Acceleration techniques for Edge AI.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">Quantization</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-settings-5-line"></i></div>
-                    <h3>Deployment</h3>
-                    <p>Edge AI Platforms, Frameworks, and End-to-End deployment pipelines.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">Pipelines</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-global-line"></i></div>
-                    <h3>Federated Learning</h3>
-                    <p>Distributed Learning and privacy-preserving training at the edge.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">Privacy</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-brain-line"></i></div>
-                    <h3>Generative AI</h3>
-                    <p>LLMs, On-device Generative AI, and Agentic AI systems.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">LLM</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-bar-chart-grouped-line"></i></div>
-                    <h3>Evaluation</h3>
-                    <p>Benchmarking, Profiling, and Performance Evaluation of Edge systems.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">Metrics</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-eye-2-line"></i></div>
-                    <h3>Perception</h3>
-                    <p>Localization, SLAM, and Sensor Fusion for advanced robotics.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">SLAM</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-guide-line"></i></div>
-                    <h3>Autonomous Edge</h3>
-                    <p>Edge AI for Robots, Drones, and Mobile Autonomous systems.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">UAV</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-robot-line"></i></div>
-                    <h3>Control & Planning</h3>
-                    <p>Real-Time Control, Planning, and Learning in Robotic Systems.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">Pathfinding</span>
-                    </div>
-                </div>
-
-                <div class="feature-card animate interactive-tag">
-                    <div class="feature-icon"><i class="ri-community-line"></i></div>
-                    <h3>Applications</h3>
-                    <p>Smart Cities, Industrial Automation, and Smart Agriculture.</p>
-                    <div class="tags" style="margin-top: auto; justify-content: center;">
-                        <span class="tag">IoT</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        <!-- 4. SPEAKERS SECTION -->
-        <section id="speakers">
             <div class="container">
                 <div class="section-title">
-                    <h2>Our Speakers (tentative) </h2>
+                    <h2>Key Topics</h2>
                 </div>
-                <div class="speaker-grid">
-                    <div class="speaker-card">
-                        <a href="https://www.iitdh.ac.in/user-profile/gayathri-ananthanarayanan" target="_blank">
-                            <img src="assets/img/speakers/gayathri.jpg" alt="Gayathri Ananthanarayanan">
-                            <h4>Gayathri Ananthanarayanan</h4>
-                        </a>
-                        <p>IIT Dharwad</p>
+                
+                <div class="cards-grid">
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-wifi-line"></i></div>
+                        <h3>Foundations</h3>
+                        <p>IoT/CPS, Accelerated Edge Computing, and Edge AI architectures.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">Architecture</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://www.bits-pilani.ac.in/hyderabad/manik-gupta" target="_blank">
-                            <img src="assets/img/speakers/manik.jpg" alt="Manik Gupta">
-                            <h4>Manik Gupta</h4>
-                        </a>
-                        <p>BITS Pilani</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-rfid-line"></i></div>
+                        <h3>TinyML</h3>
+                        <p>Embedded Machine Learning for resource-constrained microcontrollers.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">Micro-AI</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://iitbhu.ac.in/dept/cse/people/ajaycse" target="_blank">
-                            <img src="assets/img/speakers/ajay.jpg" alt="Ajay Pratap">
-                            <h4>Ajay Pratap</h4>
-                        </a>
-                        <p>IIT Bhubaneswar</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-rocket-2-line"></i></div>
+                        <h3>Optimization</h3>
+                        <p>Compression, Quantization, and Hardware Acceleration techniques for Edge AI.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">Quantization</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://iiserb.irins.org/profile/520508" target="_blank">
-                            <img src="assets/img/speakers/sujit.jpg" alt="Sujit PB">
-                            <h4>Sujit PB</h4>
-                        </a>
-                        <p>IISER Bhopal</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-settings-5-line"></i></div>
+                        <h3>Deployment</h3>
+                        <p>Edge AI Platforms, Frameworks, and End-to-End deployment pipelines.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">Pipelines</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://ojhavk.github.io/" target="_blank">
-                            <img src="assets/img/speakers/varun.jpg" alt="Varun Ojha">
-                            <h4>Varun Ojha</h4>
-                        </a>
-                        <p>Newcastle Univ, UK</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-global-line"></i></div>
+                        <h3>Federated Learning</h3>
+                        <p>Distributed Learning and privacy-preserving training at the edge.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">Privacy</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://aero.iisc.ac.in/people/sureshsundaram/" target="_blank">
-                            <img src="assets/img/speakers/suresh.jpg" alt="Suresh Sundaram">
-                            <h4>Suresh Sundaram</h4>
-                        </a>
-                        <p>IISc</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-brain-line"></i></div>
+                        <h3>Generative AI</h3>
+                        <p>LLMs, On-device Generative AI, and Agentic AI systems.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">LLM</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://www.samy101.com/" target="_blank">
-                            <img src="assets/img/speakers/pandarasamy.jpg" alt="Pandarasamy Arjunan">
-                            <h4>Pandarasamy Arjunan</h4>
-                        </a>
-                        <p>IISc</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-bar-chart-grouped-line"></i></div>
+                        <h3>Evaluation</h3>
+                        <p>Benchmarking, Profiling, and Performance Evaluation of Edge systems.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">Metrics</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://cds.iisc.ac.in/faculty/simmhan/" target="_blank">
-                            <img src="assets/img/speakers/yogesh.jpg" alt="Yogesh Simmhan">
-                            <h4>Yogesh Simmhan</h4>
-                        </a>
-                        <p>IISc</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-eye-2-line"></i></div>
+                        <h3>Perception</h3>
+                        <p>Localization, SLAM, and Sensor Fusion for advanced robotics.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">SLAM</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://www.csa.iisc.ac.in/~skmandal" target="_blank">
-                            <img src="assets/img/speakers/sumit.jpg" alt="Sumit Mandal">
-                            <h4>Sumit Mandal</h4>
-                        </a>
-                        <p>IISc</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-guide-line"></i></div>
+                        <h3>Autonomous Edge</h3>
+                        <p>Edge AI for Robots, Drones, and Mobile Autonomous systems.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">UAV</span>
+                        </div>
                     </div>
-
-                    <div class="speaker-card">
-                        <a href="https://www.punitrathore.com/home" target="_blank">
-                            <img src="assets/img/speakers/punit.jpg" alt="Punit Rathore">
-                            <h4>Punit Rathore</h4>
-                        </a>
-                        <p>IISc</p>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-robot-line"></i></div>
+                        <h3>Control & Planning</h3>
+                        <p>Real-Time Control, Planning, and Learning in Robotic Systems.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">Pathfinding</span>
+                        </div>
+                    </div>
+                    <div class="feature-card animate interactive-tag">
+                        <div class="feature-icon"><i class="ri-community-line"></i></div>
+                        <h3>Applications</h3>
+                        <p>Smart Cities, Industrial Automation, and Smart Agriculture.</p>
+                        <div class="tags" style="margin-top: auto; justify-content: center;">
+                            <span class="tag">IoT</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        
+        <section id="speakers" class="sponsors">
+            <div class="container">
+            <div class="section-title">
+                <h2>Our Speakers</h2>
+            </div>
+            <div class="speaker-grid">
+                <div class="speaker-card">
+                        <a href="https://ojhavk.github.io/" target="_blank">
+                            <img src="assets/img/speakers/varun.jpg" alt="Varun Ojha">
+                            <h4>Varun Ojha</h4>
+                        </a>
+                        <p>Newcastle University</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://iitbhu.ac.in/dept/cse/people/ajaycse" target="_blank">
+                        <img src="assets/img/speakers/ajay.jpg" alt="Ajay Pratap">
+                        <h4>Ajay Pratap</h4>
+                    </a>
+                    <p>IIT (BHU), Varanasi</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://iiserb.irins.org/profile/520508" target="_blank">
+                        <img src="assets/img/speakers/sujit.jpg" alt="Sujit PB">
+                        <h4>Sujit PB</h4>
+                    </a>
+                    <p>IISER Bhopal</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://www.linkedin.com/in/kumar-desappan-6788539/" target="_blank">
+                        <img src="assets/img/speakers/kumar.jpeg" alt="Kumar Desappan">
+                        <h4>Kumar Desappan</h4>
+                    </a>
+                    <p>Qualcomm</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://www.linkedin.com/in/adithya-thonse/" target="_blank">
+                        <img src="assets/img/speakers/adithya.jpeg" alt="Adithya">
+                        <h4>Adithya Thonse</h4>
+                    </a>
+                    <p>Texan Instruments</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://aero.iisc.ac.in/people/sureshsundaram/" target="_blank">
+                        <img src="assets/img/speakers/suresh.jpg" alt="Suresh Sundaram">
+                        <h4>Suresh Sundaram</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://cds.iisc.ac.in/faculty/simmhan/" target="_blank">
+                        <img src="assets/img/speakers/yogesh.jpg" alt="Yogesh Simmhan">
+                        <h4>Yogesh Simmhan</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://www.samy101.com/" target="_blank">
+                        <img src="assets/img/speakers/pandarasamy.jpg" alt="Pandarasamy Arjunan">
+                        <h4>Pandarasamy Arjunan</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://www.csa.iisc.ac.in/~skmandal" target="_blank">
+                        <img src="assets/img/speakers/sumit.jpg" alt="Sumit Mandal">
+                        <h4>Sumit Kumar Mandal</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://labs.dese.iisc.ac.in/viveka/" target="_blank">
+                        <img src="assets/img/speakers/Viveka.jpg" alt="Viveka">
+                        <h4>Viveka Konandur Rajanna</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://aero.iisc.ac.in/people/pushpak-jagtap/" target="_blank">
+                        <img src="assets/img/speakers/pushpak.jpg" alt="Pushpak">
+                        <h4>Pushpak Jagtap</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://ravipr009.github.io/" target="_blank">
+                        <img src="assets/img/speakers/ravi.jpg" alt="Ravi">
+                        <h4>Ravi Prakash</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <!-- <div class="speaker-card">
+                    <a href="https://cambum.net/PB/" target="_blank">
+                        <img src="assets/img/speakers/pradipta.jpg" alt="Pradipta">
+                        <h4>Pradipta Biwas</h4>
+                    </a>
+                    <p>IISc</p>
+                </div> -->
+                <div class="speaker-card">
+                    <a href="https://pavan-tallapragada.github.io/" target="_blank">
+                        <img src="assets/img/speakers/Pavan.jpg" alt="Pavankumar Tallapragada">
+                        <h4>Pavankumar Tallapragada</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://labs.dese.iisc.ac.in/zenlab/people/tv-prabhakar/" target="_blank">
+                        <img src="assets/img/speakers/prabhakar.jpg" alt="TV Prabhakar">
+                        <h4>TV Prabhakar</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <!-- <div class="speaker-card">
+                    <a href="https://ece.iisc.ac.in/~aditya/" target="_blank">
+                        <img src="assets/img/speakers/adithya_gopalan.jpeg" alt="Aditya Gopalan">
+                        <h4>Aditya Gopalan</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://cps.iisc.ac.in/faculty/vaibhav/" target="_blank">
+                        <img src="assets/img/speakers/vaibhav.jpg" alt="Vaibhav Katewa">
+                        <h4>Vaibhav Katewa</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="https://www.shishirny.com/" target="_blank">
+                        <img src="assets/img/speakers/shishir.jpg" alt="Shishir Kolathaya">
+                        <h4>Shishir Kolathaya</h4>
+                    </a>
+                    <p>IISc</p>
+                </div> -->
+                <!-- <div class="speaker-card">
+                    <a href="#" target="_blank">
+                        <img src="assets/img/speakers/kautuk.jpg" alt="Kautuk">
+                        <h4>Kautuk</h4>
+                    </a>
+                    <p>IISc</p>
+                </div>
+                <div class="speaker-card">
+                    <a href="#" target="_blank">
+                        <img src="assets/img/speakers/naina.jpg" alt="Naina">
+                        <h4>Naina</h4>
+                    </a>
+                    <p>IISc</p>
+                </div> -->
+                </div>
+            </div>
+        </section>
 
-        <!-- 6. VENUE SECTION -->
-        <section id="venue" class="prize-section">
+        <!-- 5. PROGRAMS SECTION -->
+        <section id="programs" class="prize-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Program</h2>
+                </div>
+
+                <h3><strong>⏰ School Timing</strong></h3>
+                <p style="text-align: left; font-size: 1.1em; line-height: 1.6;">
+                    The school timing is <strong>8:30 AM to 8:00 PM</strong> on all days.<br>
+                    <strong>Breakfast:</strong> 8:30 AM – 9:30 AM | <strong>Dinner:</strong> 7:00 PM – 8:00 PM<br>
+                    Tea/coffee/snacks and lunch will be provided daily to all attendees.
+                </p>
+
+                <h3><strong>📚 Session Legend</strong></h3>
+                <div style="max-width: 800px; margin: 0 auto; padding: 15px 0; text-align: center;">
+                    <ul style="list-style-type: none; padding-left: 0;">          
+                        <li style="display: inline-block; margin: 5px 8px;"><span style="background-color:#F2CEEF; padding:4px 10px; border-radius:4px;">🎉 Opening/Closing</span></li>
+                        <li style="display: inline-block; margin: 5px 8px;"><span style="background-color:#C0E4F5; padding:4px 10px; border-radius:4px;">👨‍🏫 Lecture</span></li>
+                        <li style="display: inline-block; margin: 5px 8px;"><span style="background-color:#FBE2D5; padding:4px 10px; border-radius:4px;">🧪 Lab/Tutorial</span></li>
+                        <li style="display: inline-block; margin: 5px 8px;"><span style="background-color:#DAF2D0; padding:4px 10px; border-radius:4px;">🏢 Industry talk/tutorial</span></li>
+                        <li style="display: inline-block; margin: 5px 8px;"><span style="background-color:rgb(235, 234, 234); padding:4px 10px; border-radius:4px;">† Online Talk</span></li>
+                    </ul>
+                </div>
+
+                <!-- Helper style for centering -->
+                <style>
+                    .centered-cell { text-align: center; vertical-align: middle; padding: 10px !important; }
+                </style>
+
+                <h3>Day 1: July 6th - Hardware Systems</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#F2CEEF;"><td class="centered-cell">9:30–10:00 AM</td><td class="centered-cell">Yogesh Simmhan & Suresh Sundaram (IISc)</td><td class="centered-cell">Welcome</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">10:00–11:00 AM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Edge AI Overview</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Prabhakar T V (IISc)</td><td class="centered-cell">Lecture</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">MicroPython</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Tiny ML lab</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">6:00–7:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Tiny ML lab</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Day 2: July 7th - Hardware Systems</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">9:30–11:00 AM</td><td class="centered-cell">Viveka Konandur Rajanna (IISc)</td><td class="centered-cell">Hardware Platforms & Accelerators</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Efficient AI Algorithms</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Embedded CV</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Embedded CV</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">6:00–7:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Quantization</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Day 3: July 8th - Edge AI in Industry</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#DAF2D0;"><td class="centered-cell">9:30–11:00 AM</td><td class="centered-cell">Adithya Thonse (Texan Instruments)</td><td class="centered-cell">ML on Microcontrollers</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#DAF2D0;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Kumar Desappan (Qualcomm)</td><td class="centered-cell">Industry Talk</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">Varun Ojha (Newcastle University) †</td><td class="centered-cell">Resource Efficient AI</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#DAF2D0;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell"></td><td class="centered-cell">Embedded AI with MATLAB</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">6:00–7:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Pruning</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Day 4: July 9th - Federated Learning and Agentic AI</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">9:30–11:00 AM</td><td class="centered-cell">Yogesh Simmhan (IISc)</td><td class="centered-cell">ML on Edge Accelerators</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Yogesh Simmhan (IISc)</td><td class="centered-cell">FL on Edge</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">Yogesh Simmhan (IISc)</td><td class="centered-cell">FL on Edge</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell">Yogesh Simmhan (IISc)</td><td class="centered-cell">FL on Edge</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">6:00–7:00 PM</td><td class="centered-cell">Yogesh Simmhan (IISc)</td><td class="centered-cell">Agentic AI for Drones</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Day 5: July 10th - Gen AI and LLMs at Edge</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">9:30–11:00 AM</td><td class="centered-cell">Sumit K. Mandal (IISc)</td><td class="centered-cell">Efficient LLM Inference</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Ajay Pratap (IIT-BHU)</td><td class="centered-cell">UAV for Precision Agri</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">Adithya Gopalan (IISc)</td><td class="centered-cell">RAMAN</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Gen AI at Edge</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">6:00–7:00 PM</td><td class="centered-cell">Pandarasamy Arjunan (IISc)</td><td class="centered-cell">Gen AI at Edge</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Day 6: July 11th - Control and Ground Robots</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">9:30–11:00 AM</td><td class="centered-cell">Sujit PB (IISER)</td><td class="centered-cell">Mobile Robots</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Pushpak Jagtap (IISc)</td><td class="centered-cell">Modelling and control of robotics systems</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">Pushpak Jagtap (IISc)</td><td class="centered-cell">Modelling and control of robotics systems</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell">Pushpak Jagtap (IISc)</td><td class="centered-cell">Modelling and control of robotics systems</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">6:00–7:00 PM</td><td class="centered-cell">Pushpak Jagtap (IISc)</td><td class="centered-cell">Modelling and control of robotics systems</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Day 7: July 12th - Human Robot Interaction</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">9:30–11:00 AM</td><td class="centered-cell">Ravi Prakash (IISc)</td><td class="centered-cell">Human Robot Interaction</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Ravi Prakash (IISc)</td><td class="centered-cell">Human Robot Interaction</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">Ravi Prakash (IISc)</td><td class="centered-cell">Human Robot Interaction</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#FBE2D5;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell">Ravi Prakash (IISc)</td><td class="centered-cell">Human Robot Interaction</td></tr>
+                        <!-- <tr style="background-color:#F2F2F2;"><td class="centered-cell">6:00–7:00 PM</td><td class="centered-cell">-</td><td class="centered-cell">Reserved</td></tr> -->
+                    </tbody>
+                </table>
+
+                <h3>Day 8: July 13th - Multi-agent Systems and RL</h3>
+                <table class="schedule-table" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead><tr style="background-color: var(--primary); color: white;"><th style="padding:10px;">Time</th><th style="padding:10px;">Speaker</th><th style="padding:10px;">Topic</th></tr></thead>
+                    <tbody>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">9:30–10:00 AM</td><td class="centered-cell">Vaibhav (IISc)</td><td class="centered-cell">Dept. Overview</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">10:00–11:00 AM</td><td class="centered-cell">Pavankumar Tallapragada (IISc)</td><td class="centered-cell">Multi-agent Systems and RL</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">11:00–11:30 AM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">11:30–1:00 PM</td><td class="centered-cell">Pavankumar Tallapragada (IISc)</td><td class="centered-cell">Multi-agent Systems and RL</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">1:00–2:00 PM</td><td colspan="2" class="centered-cell">Lunch and networking</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">2:00–4:00 PM</td><td class="centered-cell">CPS Team</td><td class="centered-cell">Joint Demos</td></tr>
+                        <tr style="background-color:#F2F2F2;"><td class="centered-cell">4:00–4:30 PM</td><td colspan="2" class="centered-cell">Tea/coffee break</td></tr>
+                        <tr style="background-color:#C0E4F5;"><td class="centered-cell">4:30–6:00 PM</td><td class="centered-cell">All</td><td class="centered-cell">Visit to ARTPARK</td></tr>
+                        <tr style="background-color:#F2CEEF;"><td class="centered-cell">6:00–7:00 PM</td><td colspan="2" class="centered-cell">Certificate distribution & Closing</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="venue" class="sponsors">
             <div class="container">
                 <div class="section-title">
                     <h2>Venue & Logistics</h2>
@@ -486,9 +674,8 @@
                 </div>
             </div>
         </section>
-
-        <!-- 7. CONTACT SECTION -->
-        <section id="contacts">
+        
+        <section id="contacts" class="prize-section">
             <div class="container">
                 <div class="section-title">
                     <h2>Contact Us</h2>
@@ -510,8 +697,7 @@
                 </div>
             </div>
         </section>
-
-        <!-- 8. SPONSORS SECTION -->
+        
         <section id="sponsors" class="sponsors">
             <div class="container">
                 <div class="section-title">
@@ -528,18 +714,16 @@
                 </div>
             </div>
         </section>
-
-        <!-- Footer -->
+        
         <footer>
             <div class="container">
                 <div class="copyright">
-                    <p>&copy; 2026 ACM India Summer School. Hosted by IISc.</p>
+                    <p>© 2026 ACM India Summer School. Hosted by IISc.</p>
                 </div>
             </div>
         </footer>
     </div>
-
-    <!-- Script JS -->
+    
     <script src="script.js"></script>
     <script>
         // Technically accurate typewriter texts reflecting all 11 core topics
@@ -557,7 +741,6 @@
             "Driving Smart Cities and Industrial Automation.",
             "Innovating for Sustainable Infrastructure."
         ];
-
         // Theme switch listener (re-using original script logic)
         const themeCheckbox = document.getElementById('checkbox');
         if (themeCheckbox) {
@@ -571,7 +754,6 @@
                 }
             });
         }
-
         // Initialize theme on load
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
