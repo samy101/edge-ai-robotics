@@ -660,20 +660,107 @@
                 <div class="section-title">
                     <h2>Venue & Logistics</h2>
                 </div>
-                <div class="about-wrapper">
+                <div class="about-wrapper venue-wrapper">
                     <div class="card">
                         <h3><i class="ri-map-pin-2-line"></i> Host Location</h3>
-                        <p>Indian Institute of Science (IISc),<br>C V Raman Avenue, Bangalore - 560012</p>
+                        <p>IDR Building, Indian Institute of Science (IISc),<br>C V Raman Avenue, Bangalore - 560012</p>
                         <hr style="margin: 15px 0; opacity: 0.1;">
                         <p><i class="ri-train-line"></i> Nearest Metro: Yeshwanthpur</p>
                         <p><i class="ri-road-map-line"></i> Getting to IISc: <a href="https://iisc.ac.in/about/general-information/how-to-reach-iisc/">Click here for detailed travel information.</a></p>
                     </div>
-                    <div class="card">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.3023152873743!2d77.56789517592448!3d13.016410313892576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1786c19d1f6d%3A0xba84d2e59b2425a2!2sCDS!5e0!3m2!1sen!2sin!4v1765886420757!5m2!1sen!2sin" width="100%" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="card map-card">
+                        <div class="map-embed" id="mapEmbed">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.206217982749!2d77.56236107548078!3d13.022535987297532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17004b1dd329%3A0xe6bf7a2bf1fcbc87!2sIDR%20Building!5e0!3m2!1sen!2sin!4v1783260130444!5m2!1sen!2sin"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="strict-origin-when-cross-origin">
+                            </iframe>
+                            <div class="map-overlay" id="mapOverlay">
+                                <span><i class="ri-cursor-line"></i> Click to interact with the map</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <style>
+        .venue-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr; /* map card gets more width than the info card */
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .map-card {
+            padding: 0; /* let the map fill the card edge-to-edge */
+            overflow: hidden;
+        }
+
+        .map-embed {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 380px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .map-embed:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.16);
+        }
+
+        .map-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.25s ease;
+            pointer-events: auto;
+        }
+
+        .map-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .venue-wrapper {
+                grid-template-columns: 1fr; /* stack on smaller screens */
+            }
+            .map-embed {
+                min-height: 280px;
+            }
+        }
+        </style>
+
+        <script>
+        (function () {
+            const overlay = document.getElementById('mapOverlay');
+            if (!overlay) return;
+            overlay.addEventListener('click', () => {
+                overlay.classList.add('hidden');
+            });
+        })();
+        </script>
         
         <section id="contacts" class="prize-section">
             <div class="container">
